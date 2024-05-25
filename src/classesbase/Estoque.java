@@ -1,10 +1,7 @@
-package mcg.lpv.classesbase;
+package classesbase;
 
 import java.util.Optional;
 
-/**
- * A interface Estoque define as operações básicas que um estoque de produtos deve fornecer.
- */
 public interface Estoque {
 	
 	/**

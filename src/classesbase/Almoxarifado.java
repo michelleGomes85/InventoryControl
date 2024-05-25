@@ -1,4 +1,4 @@
-package mcg.lpv.classesbase;
+package classesbase;
 
 import java.util.ArrayList;
 import java.util.List;

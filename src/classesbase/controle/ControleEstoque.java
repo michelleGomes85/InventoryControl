@@ -1,7 +1,8 @@
-package mcg.lpv.classesbase.controle;
+package classesbase.controle;
 
-import mcg.lpv.classesbase.Almoxarifado;
-import mcg.lpv.funcionalidades.Estoques;
+import classesbase.Almoxarifado;
+import classesbase.controle.gui.IgControleEstoque;
+import util.Estoques;
 
 /**
  * A classe ControleEstoque é responsável por inicializar e controlar os
@@ -20,6 +21,8 @@ public class ControleEstoque {
 				new Almoxarifado(Estoques.LIMPEZA.getNome()), 
 				new Almoxarifado(Estoques.HIGIENE.getNome())
 		};
+		
+		new IgControleEstoque(estoques);
 	}
 	
 	/**

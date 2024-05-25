@@ -1,6 +1,6 @@
-package mcg.lpv.classesbase;
+package classesbase;
 
-import mcg.lpv.funcionalidades.ConstantesControleEstoque;
+import util.ConstantesControleEstoque;
 
 /**
  * A classe Produto representa um item disponível para venda em um sistema de
