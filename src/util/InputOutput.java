@@ -9,7 +9,7 @@ import static javax.swing.JOptionPane.showMessageDialog;
 
 import java.awt.Component;
 
-public class EntradaESaida {
+public class InputOutput {
 	
 	/**
 	 * Exibe uma caixa de diálogo com uma mensagem de erro.
@@ -18,7 +18,7 @@ public class EntradaESaida {
 	 * @param mensagem - mensagem de erro a ser exibida na caixa de diálogo;
 	 * @param titulo - texto da barra de título da caixa de diálogo.
 	 */
-	public static void msgErro(Component posicao, String mensagem, String titulo) {
+	public static void msgError(Component posicao, String mensagem, String titulo) {
 		showMessageDialog(posicao, mensagem, titulo, ERROR_MESSAGE);
 	}
 	
@@ -47,7 +47,7 @@ public class EntradaESaida {
 	 * @see javax.swing.JOptionPane#NO_OPTION
 	 * @see javax.swing.JOptionPane#CLOSED_OPTION
 	 */
-	public static int msgConfirma(String pergunta, String titulo) {
+	public static int msgConfirm(String pergunta, String titulo) {
 		return showConfirmDialog(null, pergunta, titulo, YES_NO_OPTION, QUESTION_MESSAGE);
 	}
 	
@@ -57,7 +57,7 @@ public class EntradaESaida {
 	 * @return Integer se for possivel retorna o valor convertido, 
 	 * se não retorna <code>null</code>
 	 */
-	public static Integer converterValorInteger(String valor) {
+	public static Integer convertIntegerValue(String valor) {
 		try {
 			return Integer.parseInt(valor);
 		} catch (Exception e) {
@@ -71,7 +71,7 @@ public class EntradaESaida {
 	 * @return Double se for possivel retorna o valor convertido, 
 	 * se não retorna <code>null</code>
 	 */
-	public static Double converterValorDouble(String valor) {
+	public static Double convertDoubleValue(String valor) {
 		try {
 			return Double.parseDouble(valor);
 		} catch (Exception e) {

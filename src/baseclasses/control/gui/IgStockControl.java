@@ -1,4 +1,4 @@
-package classesbase.controle.gui;
+package baseclasses.control.gui;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
@@ -20,31 +20,31 @@ import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.KeyStroke;
 
-import classesbase.Almoxarifado;
-import util.EntradaESaida;
+import baseclasses.Warehouse;
+import util.InputOutput;
 import util.MenuOption;
 
-import static util.ConstantesControleEstoque.*;
+import static util.Constants.*;
 
 /**
  * Classe principal da interface gráfica de controle de estoque. Implementa as
  * funcionalidades de menu e janelas para operações no estoque.
  */
-public class IgControleEstoque extends JFrame implements Serializable {
+public class IgStockControl extends JFrame implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	private Almoxarifado[] estoques;
+	private Warehouse[] stocks;
 
 	/**
 	 * Construtor que cria a interface gráfica principal.
 	 * 
-	 * @param estoques Array de estoques gerenciados pela aplicação.
+	 * @param stocks Array de estoques gerenciados pela aplicação.
 	 */
-	public IgControleEstoque(Almoxarifado[] estoques) {
+	public IgStockControl(Warehouse[] stocks) {
 
-		super(TITULO_PROGRAMA);
-		this.estoques = estoques;
+		super(PROGRAM_TITLE);
+		this.stocks = stocks;
 
 		setupFrame();
 		setupMenu();
@@ -53,14 +53,14 @@ public class IgControleEstoque extends JFrame implements Serializable {
 		setResizable(false);
 		setVisible(true);
 		
-	}// construtor
+	}
 
 	/**
 	 * Configura as propriedades básicas da janela principal.
 	 */
 	private void setupFrame() {
 
-		setSize(TAMANHO_IGMENU[0], TAMANHO_IGMENU[1]);
+		setSize(SIZE_IGMENU[0], SIZE_IGMENU[1]);
 		addWindowListener(new WindowAdapter() {
 
 			@Override
@@ -69,8 +69,8 @@ public class IgControleEstoque extends JFrame implements Serializable {
 			}
 		});
 
-		ImagemFundo painelImagemFundo = new ImagemFundo();
-		getContentPane().add(painelImagemFundo, BorderLayout.CENTER);
+		BackgroundImage panelBackgroundImage = new BackgroundImage();
+		getContentPane().add(panelBackgroundImage, BorderLayout.CENTER);
 	}
 
 	/**
@@ -95,10 +95,10 @@ public class IgControleEstoque extends JFrame implements Serializable {
 		JMenu produtoMenu = new JMenu("Produtos");
 		produtoMenu.setMnemonic(KeyEvent.VK_P);
 
-		produtoMenu.add(createMenuItem(MenuOption.CADASTRAR.getTitle(), MenuOption.CADASTRAR.getMnemonic(), e -> cadastrarProduto()));
-		produtoMenu.add(createMenuItem(MenuOption.PESQUISAR.getTitle(), MenuOption.PESQUISAR.getMnemonic(), e -> pesquisarProduto()));
+		produtoMenu.add(createMenuItem(MenuOption.REGISTER.getTitle(), MenuOption.REGISTER.getMnemonic(), e -> register()));
+		produtoMenu.add(createMenuItem(MenuOption.SEARCH.getTitle(), MenuOption.SEARCH.getMnemonic(), e -> search()));
 		produtoMenu.add(new JSeparator());
-		produtoMenu.add(createMenuItem(MenuOption.SAIR.getTitle(), MenuOption.SAIR.getMnemonic(), e -> System.exit(0)));
+		produtoMenu.add(createMenuItem(MenuOption.CLOSE.getTitle(), MenuOption.CLOSE.getMnemonic(), e -> System.exit(0)));
 
 		return produtoMenu;
 	}
@@ -110,15 +110,15 @@ public class IgControleEstoque extends JFrame implements Serializable {
 	 */
 	private JMenu createStockOptions() {
 
-		JMenu estoqueMenu = new JMenu("Estoques");
-		estoqueMenu.setMnemonic(KeyEvent.VK_E);
+		JMenu stockMenu = new JMenu("Estoques");
+		stockMenu.setMnemonic(KeyEvent.VK_E);
 
-		estoqueMenu.add(createMenuItem(MenuOption.QUANTIDADE_PRODUTOS.getTitle(), MenuOption.QUANTIDADE_PRODUTOS.getMnemonic(), e -> quantidadeProdutosEstoque()));
-		estoqueMenu.add(createMenuItem(MenuOption.VALOR_TOTAL.getTitle(), MenuOption.VALOR_TOTAL.getMnemonic(), e -> valorTotalEstoque()));
-		estoqueMenu.add(new JSeparator());
-		estoqueMenu.add(createMenuItem(MenuOption.RELATORIO.getTitle(), MenuOption.RELATORIO.getMnemonic(), e -> relatorioPorEstoque()));
+		stockMenu.add(createMenuItem(MenuOption.QUANTITY_OF_PRODUCTS.getTitle(), MenuOption.QUANTITY_OF_PRODUCTS.getMnemonic(), e -> quantityProducts()));
+		stockMenu.add(createMenuItem(MenuOption.AMOUNT.getTitle(), MenuOption.AMOUNT.getMnemonic(), e -> amount()));
+		stockMenu.add(new JSeparator());
+		stockMenu.add(createMenuItem(MenuOption.REPORT.getTitle(), MenuOption.REPORT.getMnemonic(), e -> reportByEstoque()));
 
-		return estoqueMenu;
+		return stockMenu;
 	}
 
 	/**
@@ -142,8 +142,8 @@ public class IgControleEstoque extends JFrame implements Serializable {
 	/**
 	 * Abre a janela de cadastro de produto.
 	 */
-	private void cadastrarProduto() {
-		new IgCadastro(this, estoques);
+	private void register() {
+		new IgRegister(this, stocks);
 	}
 
 	/**
@@ -151,36 +151,36 @@ public class IgControleEstoque extends JFrame implements Serializable {
 	 * 
 	 * Exibe mensagem de erro se não houver produtos cadastrados.
 	 */
-	private void pesquisarProduto() {
+	private void search() {
 		
-		if (!verificarEstoque())
-			msgErroSemProdutosCadastrados(this);
+		if (!verifyStock())
+			noProductsRegister(this);
 	}
 
 	/**
 	 * Abre a janela para exibir a quantidade total de produtos em cada estoque.
 	 * Exibe mensagem de erro se não houver produtos cadastrados.
 	 */
-	private void quantidadeProdutosEstoque() {
+	private void quantityProducts() {
 		
-		if (!verificarEstoque())
-			msgErroSemProdutosCadastrados(this);
+		if (!verifyStock())
+			noProductsRegister(this);
 	}
 
 	/**
 	 * Abre a janela para exibir o valor total dos produtos em cada estoque. Exibe
 	 * mensagem de erro se não houver produtos cadastrados.
 	 */
-	private void valorTotalEstoque() {
+	private void amount() {
 		
-		if (!verificarEstoque())
-			msgErroSemProdutosCadastrados(this);
+		if (!verifyStock())
+			noProductsRegister(this);
 	}
 
 	/**
 	 * Abre a janela para gerar um relatório de um estoque selecionado.
 	 */
-	private void relatorioPorEstoque() {
+	private void reportByEstoque() {
 		
 	}
 
@@ -189,29 +189,29 @@ public class IgControleEstoque extends JFrame implements Serializable {
 	 * 
 	 * @return true se houver produtos cadastrados, false caso contrário.
 	 */
-	private boolean verificarEstoque() {
+	private boolean verifyStock() {
 
-		int produtosCadastrados = 0;
+		int products = 0;
 
-		for (int indice = 0; indice < estoques.length; indice++)
-			produtosCadastrados += estoques[indice].tamanho();
+		for (int index = 0; index < stocks.length; index++)
+			products += stocks[index].size();
 
-		return (produtosCadastrados != 0) ? true : false;
+		return (products != 0) ? true : false;
 	}
 
 	/**
 	 * Exibe uma mensagem de erro indicando que não há produtos cadastrados.
 	 * 
-	 * @param posicao Componente onde a caixa de diálogo será exibida.
+	 * @param component Componente onde a caixa de diálogo será exibida.
 	 */
-	public static void msgErroSemProdutosCadastrados(Component posicao) {
-		EntradaESaida.msgErro(posicao, MSG_ERROR_NOT_REGISTERED_PRODUCTS, TITULO_PROGRAMA);
+	public static void noProductsRegister(Component component) {
+		InputOutput.msgError(component, MSG_ERROR_NOT_REGISTERED_PRODUCTS, PROGRAM_TITLE);
 	}
 
 	/**
 	 * JPanel para adicionar a imagem de fundo.
 	 */
-	private static class ImagemFundo extends JPanel {
+	private static class BackgroundImage extends JPanel {
 
 		private static final long serialVersionUID = 1L;
 
@@ -219,10 +219,10 @@ public class IgControleEstoque extends JFrame implements Serializable {
 		protected void paintComponent(Graphics g) {
 			super.paintComponent(g);
 
-			Image imagem = new ImageIcon(getClass().getResource(URL_IMG)).getImage();
-			g.drawImage(imagem, 0, 0, this);
+			Image image = new ImageIcon(getClass().getResource(URL_IMG)).getImage();
+			g.drawImage(image, 0, 0, this);
 		}
 
-	}// class ImagemFundo
+	}// class BackgroundImage
 
 }// class IgControleEstoque

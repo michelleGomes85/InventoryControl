@@ -7,12 +7,12 @@ import java.awt.event.KeyEvent;
  */
 public enum MenuOption {
 	
-    CADASTRAR("Cadastrar", KeyEvent.VK_C),
-    PESQUISAR("Pesquisar", KeyEvent.VK_P),
-    SAIR("Sair", KeyEvent.VK_S),
-    QUANTIDADE_PRODUTOS("Quantidade Produtos", KeyEvent.VK_Q),
-    VALOR_TOTAL("Valor Total", KeyEvent.VK_T),
-    RELATORIO("Relatório", KeyEvent.VK_R);
+    REGISTER("Cadastrar", KeyEvent.VK_C),
+    SEARCH("Pesquisar", KeyEvent.VK_P),
+    CLOSE("Sair", KeyEvent.VK_S),
+    QUANTITY_OF_PRODUCTS("Quantidade Produtos", KeyEvent.VK_Q),
+    AMOUNT("Valor Total", KeyEvent.VK_T),
+    REPORT("Relatório", KeyEvent.VK_R);
 
     private final String title;
     private final int mnemonic;
