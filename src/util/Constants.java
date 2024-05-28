@@ -6,10 +6,13 @@ public interface Constants {
 	
 	String PROGRAM_TITLE = "Controle de Estoque";
 	String REGISTRATION_TITLE = PROGRAM_TITLE + ": Cadastro";
+	String SEARCH_TITLE = PROGRAM_TITLE + ": Pesquisa";
 	
 	String URL_IMG = "/util/img/background.png";
 	
 	String EMPTY = "";
+	String NEW_LINE = "\n";
+	String TWO_DOTS = ":";
 	
 	int[] SIZE_IGMENU = {492, 361},
 		  SIZE_IGREGISTER = {378, 205},
@@ -20,13 +23,22 @@ public interface Constants {
 	String CANCEL_BUTTON = "Cancelar",
 		   CANCEL_BUTTON_TIP = "Cancelar Operação",
 		   RECORD_BUTTON = "Gravar",
-		   RECORD_BUTTON_TIP = "Gravar produto";
+		   RECORD_BUTTON_TIP = "Gravar produto",
+		   
+		   SEARCH_BUTTON = "Pesquisar",
+		   SEARCH_BUTTON_TIP = "Pesquisar Produto";
+	
+	String PRODUCT_LABEL = "Produto",
+		   PRODUCT_LABEL_TIP = "Nome do Produto",
+		   STOCK_LABEL = "Estoque";
 	
 	String MSG_REGISTERED_PRODUCT = "Produto Cadastrado";
 	String MSG_UPDATE_PRODUCT = "Este produto já existe deseja atualiza-lo?";
 	
+	
 	String MSG_ERROR_NOT_REGISTERED_PRODUCTS = "Ainda não foi cadastrado produtos"; 
 	String MSG_ERROR_EMPTY_FIELDS = "Há algum campo sem responder";
 	String MSG_ERROR_INVALID_VALUE = "Valor Inválido";
+	String MSG_ERROR_PRODUCT_NOT_FOUND = "Produto não encontrado";
 	
 }//interface ConstantesControleEstoque

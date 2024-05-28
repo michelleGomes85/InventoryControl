@@ -52,7 +52,6 @@ public class IgStockControl extends JFrame implements Serializable {
 		setLocationRelativeTo(null);
 		setResizable(false);
 		setVisible(true);
-		
 	}
 
 	/**
@@ -92,15 +91,15 @@ public class IgStockControl extends JFrame implements Serializable {
      */
 	private JMenu createProductOptions() {
 
-		JMenu produtoMenu = new JMenu("Produtos");
-		produtoMenu.setMnemonic(KeyEvent.VK_P);
+		JMenu productMenu = new JMenu(PRODUCT_LABEL);
+		productMenu.setMnemonic(KeyEvent.VK_P);
 
-		produtoMenu.add(createMenuItem(MenuOption.REGISTER.getTitle(), MenuOption.REGISTER.getMnemonic(), e -> register()));
-		produtoMenu.add(createMenuItem(MenuOption.SEARCH.getTitle(), MenuOption.SEARCH.getMnemonic(), e -> search()));
-		produtoMenu.add(new JSeparator());
-		produtoMenu.add(createMenuItem(MenuOption.CLOSE.getTitle(), MenuOption.CLOSE.getMnemonic(), e -> System.exit(0)));
+		productMenu.add(createMenuItem(MenuOption.REGISTER.getTitle(), MenuOption.REGISTER.getMnemonic(), e -> register()));
+		productMenu.add(createMenuItem(MenuOption.SEARCH.getTitle(), MenuOption.SEARCH.getMnemonic(), e -> search()));
+		productMenu.add(new JSeparator());
+		productMenu.add(createMenuItem(MenuOption.CLOSE.getTitle(), MenuOption.CLOSE.getMnemonic(), e -> System.exit(0)));
 
-		return produtoMenu;
+		return productMenu;
 	}
 
 	/**
@@ -110,7 +109,7 @@ public class IgStockControl extends JFrame implements Serializable {
 	 */
 	private JMenu createStockOptions() {
 
-		JMenu stockMenu = new JMenu("Estoques");
+		JMenu stockMenu = new JMenu(STOCK_LABEL);
 		stockMenu.setMnemonic(KeyEvent.VK_E);
 
 		stockMenu.add(createMenuItem(MenuOption.QUANTITY_OF_PRODUCTS.getTitle(), MenuOption.QUANTITY_OF_PRODUCTS.getMnemonic(), e -> quantityProducts()));
@@ -155,6 +154,8 @@ public class IgStockControl extends JFrame implements Serializable {
 		
 		if (!verifyStock())
 			noProductsRegister(this);
+		else
+			new IgSearch(this, stocks);
 	}
 
 	/**
