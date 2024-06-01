@@ -23,6 +23,7 @@ import javax.swing.KeyStroke;
 import baseclasses.Warehouse;
 import util.InputOutput;
 import util.MenuOption;
+import util.Stocks;
 
 import static util.Constants.*;
 
@@ -166,6 +167,12 @@ public class IgStockControl extends JFrame implements Serializable {
 		
 		if (!verifyStock())
 			noProductsRegister(this);
+		else {
+			new IgQuery(this, QUANTITY_PRODUCTS_STOCK, 
+				String.format(FORMAT_QUANTITY_PRODUCTS, stocks[Stocks.FOOD.ordinal()].quantityProductsStock()),
+				String.format(FORMAT_QUANTITY_PRODUCTS, stocks[Stocks.CLEANING.ordinal()].quantityProductsStock()),
+				String.format(FORMAT_QUANTITY_PRODUCTS, stocks[Stocks.HYGIENE.ordinal()].quantityProductsStock()));
+		}
 	}
 
 	/**
@@ -176,6 +183,12 @@ public class IgStockControl extends JFrame implements Serializable {
 		
 		if (!verifyStock())
 			noProductsRegister(this);
+		else {
+			new IgQuery(this, TOTAL_STOCK_VALUE, 
+					String.format(FORMAT_STOCK_VALUE, stocks[Stocks.FOOD.ordinal()].amount()),
+					String.format(FORMAT_STOCK_VALUE, stocks[Stocks.CLEANING.ordinal()].amount()),
+					String.format(FORMAT_STOCK_VALUE, stocks[Stocks.HYGIENE.ordinal()].amount()));
+		}
 	}
 
 	/**
@@ -183,6 +196,8 @@ public class IgStockControl extends JFrame implements Serializable {
 	 */
 	private void reportByEstoque() {
 		
+		if (!verifyStock())
+			noProductsRegister(this);
 	}
 
 	/**

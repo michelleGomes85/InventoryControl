@@ -7,12 +7,20 @@ public interface Constants {
 	String PROGRAM_TITLE = "Controle de Estoque";
 	String REGISTRATION_TITLE = PROGRAM_TITLE + ": Cadastro";
 	String SEARCH_TITLE = PROGRAM_TITLE + ": Pesquisa";
+	String QUERY_TITLE = PROGRAM_TITLE + "Consulta";
+	
+	String QUANTITY_PRODUCTS_STOCK = "Quantidade Produtos Estoque";
+	String TOTAL_STOCK_VALUE = "Valor total Produtos Estoque";
+	
+	String FORMAT_QUANTITY_PRODUCTS = " = %d produtos";
+	String FORMAT_STOCK_VALUE = " = R$ %.2f";
 	
 	String URL_IMG = "/util/img/background.png";
 	
 	String EMPTY = "";
 	String NEW_LINE = "\n";
 	String TWO_DOTS = ":";
+	String EQUAL = "=";
 	
 	int[] SIZE_IGMENU = {492, 361},
 		  SIZE_IGREGISTER = {378, 205},
@@ -24,9 +32,10 @@ public interface Constants {
 		   CANCEL_BUTTON_TIP = "Cancelar Operação",
 		   RECORD_BUTTON = "Gravar",
 		   RECORD_BUTTON_TIP = "Gravar produto",
-		   
 		   SEARCH_BUTTON = "Pesquisar",
-		   SEARCH_BUTTON_TIP = "Pesquisar Produto";
+		   SEARCH_BUTTON_TIP = "Pesquisar Produto",
+		   CLOSE_BUTTON = "Fechar",
+		   CLOSE_BUTTON_TIP = "Fechar janela";
 	
 	String PRODUCT_LABEL = "Produto",
 		   PRODUCT_LABEL_TIP = "Nome do Produto",

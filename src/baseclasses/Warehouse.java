@@ -86,7 +86,7 @@ public class Warehouse implements Stock {
 	 * 
 	 * @return A quantidade total de produtos no estoque.
 	 */
-	public int quantidadeProdutosEstoque() {
+	public int quantityProductsStock() {
 		
 		Product[] products = report();
 		int quantity = 0;
