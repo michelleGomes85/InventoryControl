@@ -17,9 +17,9 @@ public class StockControl {
 	public StockControl() {
 		
 		Warehouse[] stocks = {	
-				new Warehouse(Stocks.FOOD.getTitle()), 
-				new Warehouse(Stocks.CLEANING.getTitle()), 
-				new Warehouse(Stocks.HYGIENE.getTitle())
+				new Warehouse(Stocks.FOOD), 
+				new Warehouse(Stocks.HYGIENE),
+				new Warehouse(Stocks.CLEANING) 
 		};
 		
 		new IgStockControl(stocks);

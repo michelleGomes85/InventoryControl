@@ -1,5 +1,16 @@
 package baseclasses.control.gui;
 
+import static util.Constants.FORMAT_QUANTITY_PRODUCTS;
+import static util.Constants.FORMAT_STOCK_VALUE;
+import static util.Constants.MSG_ERROR_NOT_REGISTERED_PRODUCTS;
+import static util.Constants.PRODUCT_LABEL;
+import static util.Constants.PROGRAM_TITLE;
+import static util.Constants.QUANTITY_PRODUCTS_STOCK;
+import static util.Constants.SIZE_IGCONTROL;
+import static util.Constants.STOCK_LABEL;
+import static util.Constants.TOTAL_STOCK_VALUE;
+import static util.Constants.URL_IMG;
+
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Graphics;
@@ -24,8 +35,6 @@ import baseclasses.Warehouse;
 import util.InputOutput;
 import util.MenuOption;
 import util.Stocks;
-
-import static util.Constants.*;
 
 /**
  * Classe principal da interface gráfica de controle de estoque. Implementa as
@@ -60,7 +69,7 @@ public class IgStockControl extends JFrame implements Serializable {
 	 */
 	private void setupFrame() {
 
-		setSize(SIZE_IGMENU[0], SIZE_IGMENU[1]);
+		setSize(SIZE_IGCONTROL[0], SIZE_IGCONTROL[1]);
 		addWindowListener(new WindowAdapter() {
 
 			@Override
@@ -198,6 +207,19 @@ public class IgStockControl extends JFrame implements Serializable {
 		
 		if (!verifyStock())
 			noProductsRegister(this);
+		else {
+			new IgMenu(this, getNamesStocks());
+		}
+	}
+
+	private Stocks[] getNamesStocks() {
+		
+		Stocks[] stocksEnum = new Stocks[stocks.length];
+		int valueStock = 0;
+		for (Warehouse warehouse : stocks)
+			stocksEnum[valueStock++] = warehouse.getTypeStock();
+		
+		return stocksEnum;
 	}
 
 	/**

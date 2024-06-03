@@ -7,7 +7,8 @@ public interface Constants {
 	String PROGRAM_TITLE = "Controle de Estoque";
 	String REGISTRATION_TITLE = PROGRAM_TITLE + ": Cadastro";
 	String SEARCH_TITLE = PROGRAM_TITLE + ": Pesquisa";
-	String QUERY_TITLE = PROGRAM_TITLE + "Consulta";
+	String QUERY_TITLE = PROGRAM_TITLE + ": Consulta";
+	String MENU_TITLE = PROGRAM_TITLE + ": Menu";
 	
 	String QUANTITY_PRODUCTS_STOCK = "Quantidade Produtos Estoque";
 	String TOTAL_STOCK_VALUE = "Valor total Produtos Estoque";
@@ -22,11 +23,12 @@ public interface Constants {
 	String TWO_DOTS = ":";
 	String EQUAL = "=";
 	
-	int[] SIZE_IGMENU = {492, 361},
+	int[] SIZE_IGCONTROL = {492, 361},
 		  SIZE_IGREGISTER = {378, 205},
 		  SIZE_IGSEARCH = {307, 129},
 		  SIZE_IGQUERY = {353, 220},
-		  SIZE_IGREPORT = {450, 298};
+		  SIZE_IGREPORT = {450, 298},
+		  SIZE_IGMENU = {320, 120};
 	
 	String CANCEL_BUTTON = "Cancelar",
 		   CANCEL_BUTTON_TIP = "Cancelar Operação",
@@ -39,7 +41,8 @@ public interface Constants {
 	
 	String PRODUCT_LABEL = "Produto",
 		   PRODUCT_LABEL_TIP = "Nome do Produto",
-		   STOCK_LABEL = "Estoque";
+		   STOCK_LABEL = "Estoque",
+		   MENU_LABEL = "Escolha uma opção: ";
 	
 	String MSG_REGISTERED_PRODUCT = "Produto Cadastrado";
 	String MSG_UPDATE_PRODUCT = "Este produto já existe deseja atualiza-lo?";

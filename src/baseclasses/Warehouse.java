@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import util.Stocks;
+
 /**
  * A classe Warehouse (Almoxarifado) representa um tipo de estoque onde 
  * produtos podem ser armazenados e gerenciados. 
@@ -12,7 +14,7 @@ import java.util.Optional;
 public class Warehouse implements Stock {
 	
 	private List<Product> stock;
-	private String typeStock;
+	private Stocks typeStock;
 	
 	/**
 	 * Construtor que inicializa a lista de produtos e define
@@ -20,17 +22,17 @@ public class Warehouse implements Stock {
 	 * 
 	 * @param typeStock O nome do tipo de estoque.
 	 */
-	public Warehouse(String typeStock) {
+	public Warehouse(Stocks typeStock) {
 		stock = new ArrayList<>();
 		
 		this.typeStock = typeStock;
 	}
 	
-	public String getTypeStock() {
+	public Stocks getTypeStock() {
 		return typeStock;
 	}
 
-	public void setTypeStock(String typeStock) {
+	public void setTypeStock(Stocks typeStock) {
 		this.typeStock = typeStock;
 	}
 	

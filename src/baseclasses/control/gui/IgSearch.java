@@ -1,5 +1,21 @@
 package baseclasses.control.gui;
 
+import static util.Constants.CANCEL_BUTTON;
+import static util.Constants.CANCEL_BUTTON_TIP;
+import static util.Constants.EMPTY;
+import static util.Constants.MSG_ERROR_EMPTY_FIELDS;
+import static util.Constants.MSG_ERROR_PRODUCT_NOT_FOUND;
+import static util.Constants.NEW_LINE;
+import static util.Constants.PRODUCT_LABEL;
+import static util.Constants.PRODUCT_LABEL_TIP;
+import static util.Constants.SEARCH_BUTTON;
+import static util.Constants.SEARCH_BUTTON_TIP;
+import static util.Constants.SEARCH_TITLE;
+import static util.Constants.SIZE_IGSEARCH;
+import static util.Constants.TWO_DOTS;
+import static util.InputOutput.msgError;
+import static util.InputOutput.msgInfo;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Cursor;
@@ -20,9 +36,6 @@ import javax.swing.JTextField;
 
 import baseclasses.Product;
 import baseclasses.Warehouse;
-
-import static util.Constants.*;
-import static util.InputOutput.*;
 
 /**
  * A classe IgSearch representa uma caixa de diálogo para pesquisa de produtos

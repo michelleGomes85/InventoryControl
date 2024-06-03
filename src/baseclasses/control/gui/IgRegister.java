@@ -1,16 +1,16 @@
 package baseclasses.control.gui;
 
-import static util.Constants.REGISTRATION_TITLE;
+import static util.Constants.CANCEL_BUTTON;
+import static util.Constants.CANCEL_BUTTON_TIP;
+import static util.Constants.EMPTY;
 import static util.Constants.MSG_ERROR_EMPTY_FIELDS;
 import static util.Constants.MSG_ERROR_INVALID_VALUE;
 import static util.Constants.MSG_REGISTERED_PRODUCT;
 import static util.Constants.MSG_UPDATE_PRODUCT;
-import static util.Constants.SIZE_IGREGISTER;
-import static util.Constants.CANCEL_BUTTON;
-import static util.Constants.CANCEL_BUTTON_TIP;
 import static util.Constants.RECORD_BUTTON;
 import static util.Constants.RECORD_BUTTON_TIP;
-import static util.Constants.EMPTY;
+import static util.Constants.REGISTRATION_TITLE;
+import static util.Constants.SIZE_IGREGISTER;
 import static util.InputOutput.convertDoubleValue;
 import static util.InputOutput.convertIntegerValue;
 import static util.InputOutput.msgConfirm;
@@ -21,6 +21,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.FlowLayout;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -38,8 +39,8 @@ import javax.swing.JTextField;
 
 import baseclasses.Product;
 import baseclasses.Warehouse;
-import util.Stocks;
 import util.LabelRegister;
+import util.Stocks;
 
 /**
  * Classe responsável pela interface gráfica de cadastro de produtos.
@@ -225,7 +226,7 @@ public class IgRegister extends JDialog implements Serializable {
 	* @param actionListener Listener de ação do botão.
 	* @return JButton configurado.
 	*/
-	private JButton createButton(String text, int mnemonic, String toolTip, java.awt.event.ActionListener actionListener) {
+	private JButton createButton(String text, int mnemonic, String toolTip, ActionListener actionListener) {
 	
 		JButton button = new JButton(text);
 		button.setBackground(Color.WHITE);
