@@ -10,6 +10,7 @@ import static util.Constants.SIZE_IGCONTROL;
 import static util.Constants.STOCK_LABEL;
 import static util.Constants.TOTAL_STOCK_VALUE;
 import static util.Constants.URL_IMG;
+import static util.Constants.NO_SELECT_STOCK;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
@@ -53,10 +54,9 @@ public class IgStockControl extends JFrame implements Serializable {
 	 */
 	public IgStockControl(Warehouse[] stocks) {
 
-		super(PROGRAM_TITLE);
 		this.stocks = stocks;
 
-		setupFrame();
+		initComponent();
 		setupMenu();
 
 		setLocationRelativeTo(null);
@@ -67,8 +67,9 @@ public class IgStockControl extends JFrame implements Serializable {
 	/**
 	 * Configura as propriedades básicas da janela principal.
 	 */
-	private void setupFrame() {
+	private void initComponent() {
 
+		setTitle(PROGRAM_TITLE);
 		setSize(SIZE_IGCONTROL[0], SIZE_IGCONTROL[1]);
 		addWindowListener(new WindowAdapter() {
 
@@ -76,6 +77,7 @@ public class IgStockControl extends JFrame implements Serializable {
 			public void windowClosing(WindowEvent e) {
 				System.exit(0);
 			}
+
 		});
 
 		BackgroundImage panelBackgroundImage = new BackgroundImage();
@@ -94,20 +96,22 @@ public class IgStockControl extends JFrame implements Serializable {
 		menuBar.add(createStockOptions());
 	}
 
-    /**
-     * Cria o menu de opções de produtos.
-     * 
-     * @return JMenu configurado com opções de produtos.
-     */
+	/**
+	 * Cria o menu de opções de produtos.
+	 * 
+	 * @return JMenu configurado com opções de produtos.
+	 */
 	private JMenu createProductOptions() {
 
 		JMenu productMenu = new JMenu(PRODUCT_LABEL);
 		productMenu.setMnemonic(KeyEvent.VK_P);
 
-		productMenu.add(createMenuItem(MenuOption.REGISTER.getTitle(), MenuOption.REGISTER.getMnemonic(), e -> register()));
+		productMenu.add(
+				createMenuItem(MenuOption.REGISTER.getTitle(), MenuOption.REGISTER.getMnemonic(), e -> register()));
 		productMenu.add(createMenuItem(MenuOption.SEARCH.getTitle(), MenuOption.SEARCH.getMnemonic(), e -> search()));
 		productMenu.add(new JSeparator());
-		productMenu.add(createMenuItem(MenuOption.CLOSE.getTitle(), MenuOption.CLOSE.getMnemonic(), e -> System.exit(0)));
+		productMenu
+				.add(createMenuItem(MenuOption.CLOSE.getTitle(), MenuOption.CLOSE.getMnemonic(), e -> System.exit(0)));
 
 		return productMenu;
 	}
@@ -122,10 +126,12 @@ public class IgStockControl extends JFrame implements Serializable {
 		JMenu stockMenu = new JMenu(STOCK_LABEL);
 		stockMenu.setMnemonic(KeyEvent.VK_E);
 
-		stockMenu.add(createMenuItem(MenuOption.QUANTITY_OF_PRODUCTS.getTitle(), MenuOption.QUANTITY_OF_PRODUCTS.getMnemonic(), e -> quantityProducts()));
+		stockMenu.add(createMenuItem(MenuOption.QUANTITY_OF_PRODUCTS.getTitle(),
+				MenuOption.QUANTITY_OF_PRODUCTS.getMnemonic(), e -> quantityProducts()));
 		stockMenu.add(createMenuItem(MenuOption.AMOUNT.getTitle(), MenuOption.AMOUNT.getMnemonic(), e -> amount()));
 		stockMenu.add(new JSeparator());
-		stockMenu.add(createMenuItem(MenuOption.REPORT.getTitle(), MenuOption.REPORT.getMnemonic(), e -> reportByEstoque()));
+		stockMenu.add(
+				createMenuItem(MenuOption.REPORT.getTitle(), MenuOption.REPORT.getMnemonic(), e -> reportByEstoque()));
 
 		return stockMenu;
 	}
@@ -161,7 +167,7 @@ public class IgStockControl extends JFrame implements Serializable {
 	 * Exibe mensagem de erro se não houver produtos cadastrados.
 	 */
 	private void search() {
-		
+
 		if (!verifyStock())
 			noProductsRegister(this);
 		else
@@ -173,14 +179,14 @@ public class IgStockControl extends JFrame implements Serializable {
 	 * Exibe mensagem de erro se não houver produtos cadastrados.
 	 */
 	private void quantityProducts() {
-		
+
 		if (!verifyStock())
 			noProductsRegister(this);
 		else {
-			new IgQuery(this, QUANTITY_PRODUCTS_STOCK, 
-				String.format(FORMAT_QUANTITY_PRODUCTS, stocks[Stocks.FOOD.ordinal()].quantityProductsStock()),
-				String.format(FORMAT_QUANTITY_PRODUCTS, stocks[Stocks.CLEANING.ordinal()].quantityProductsStock()),
-				String.format(FORMAT_QUANTITY_PRODUCTS, stocks[Stocks.HYGIENE.ordinal()].quantityProductsStock()));
+			new IgQuery(this, QUANTITY_PRODUCTS_STOCK,
+					String.format(FORMAT_QUANTITY_PRODUCTS, stocks[Stocks.FOOD.ordinal()].quantityProductsStock()),
+					String.format(FORMAT_QUANTITY_PRODUCTS, stocks[Stocks.CLEANING.ordinal()].quantityProductsStock()),
+					String.format(FORMAT_QUANTITY_PRODUCTS, stocks[Stocks.HYGIENE.ordinal()].quantityProductsStock()));
 		}
 	}
 
@@ -189,11 +195,11 @@ public class IgStockControl extends JFrame implements Serializable {
 	 * mensagem de erro se não houver produtos cadastrados.
 	 */
 	private void amount() {
-		
+
 		if (!verifyStock())
 			noProductsRegister(this);
 		else {
-			new IgQuery(this, TOTAL_STOCK_VALUE, 
+			new IgQuery(this, TOTAL_STOCK_VALUE,
 					String.format(FORMAT_STOCK_VALUE, stocks[Stocks.FOOD.ordinal()].amount()),
 					String.format(FORMAT_STOCK_VALUE, stocks[Stocks.CLEANING.ordinal()].amount()),
 					String.format(FORMAT_STOCK_VALUE, stocks[Stocks.HYGIENE.ordinal()].amount()));
@@ -204,21 +210,48 @@ public class IgStockControl extends JFrame implements Serializable {
 	 * Abre a janela para gerar um relatório de um estoque selecionado.
 	 */
 	private void reportByEstoque() {
-		
+
 		if (!verifyStock())
 			noProductsRegister(this);
 		else {
-			new IgMenu(this, getNamesStocks());
+
+			int index = 0;
+			
+			do {
+				
+				IgMenu igMenu = new IgMenu(this, getNamesStocks());
+
+				index = igMenu.getSelectedStockIndex();
+
+				if (index != NO_SELECT_STOCK) {
+					Warehouse stock = stocks[index];
+
+					if (stock.size() != 0)
+						new IgReport(this, stock);
+					else
+						noProductsRegister(this);
+				}
+
+			} while (index != NO_SELECT_STOCK);
+
 		}
 	}
 
+	/**
+	 * Obtém os tipos de estoque para cada armazém na lista de estoques.
+	 *
+	 * Este método percorre a lista de armazéns (`stocks`) e extrai o tipo de
+	 * estoque de cada armazém, armazenando-os em um array de `Stocks`.
+	 *
+	 * @return um array de `Stocks` contendo os tipos de estoque para cada armazém.
+	 */
 	private Stocks[] getNamesStocks() {
-		
+
 		Stocks[] stocksEnum = new Stocks[stocks.length];
 		int valueStock = 0;
 		for (Warehouse warehouse : stocks)
 			stocksEnum[valueStock++] = warehouse.getTypeStock();
-		
+
 		return stocksEnum;
 	}
 

@@ -1,5 +1,10 @@
 package baseclasses.control.gui;
 
+import static util.Constants.MENU_LABEL;
+import static util.Constants.MENU_TITLE;
+import static util.Constants.NO_SELECT_STOCK;
+import static util.Constants.SIZE_IGMENU;
+
 import java.awt.BorderLayout;
 import java.awt.Cursor;
 import java.awt.Font;
@@ -18,8 +23,6 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import util.Stocks;
-
-import static util.Constants.*;
 
 /**
  * A classe IgMenu representa um diálogo de menu permite aos usuários 
@@ -137,6 +140,25 @@ public class IgMenu extends JDialog implements Serializable {
 	 */
 	public String getSelectedOption() {
 		return selectedOption.get();
+	}
+	
+	/**
+	 * Retorna o índice do estoque selecionado pelo usuário.
+	 *
+	 * @return o índice do estoque selecionado
+	 */
+	public int getSelectedStockIndex() {
+	    
+		String selectedOption = getSelectedOption();
+		
+	    if (selectedOption != null) {
+	        for (int i = 0; i < stocks.length; i++) {
+	            if (stocks[i].getTitle().equals(selectedOption))
+	                return i;
+	        }
+	    }
+	    
+	    return NO_SELECT_STOCK;
 	}
 
 }// class IgMenu
