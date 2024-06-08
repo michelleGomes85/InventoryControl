@@ -1,11 +1,34 @@
-# Compiled class files
+# Arquivos de compilação Java
+bin/
+jar/
+
+# Arquivos .class gerados
 *.class
 
-# Java Project Files
+# Arquivos .jar gerados
 *.jar
-*.war
-*.ear
-*.nar
-*.zip
-*.tar.gz
-*.rar
+
+# Arquivos de configuração do Eclipse
+.settings/
+
+# Arquivos de configuração do Maven
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+
+# Arquivos de log
+*.log
+
+# Diretório de saída padrão do Maven
+target/
+
+# Diretório de dependências do Maven
+dependency/
+
+# Arquivos de configuração específicos do sistema operacional
+*.DS_Store
+Thumbs.db
