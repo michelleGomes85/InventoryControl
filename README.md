@@ -79,5 +79,10 @@ Para rodar o projeto, siga estas etapas:
 6. Execute a classe `StockControl.java` para iniciar o programa.
 7. A interface gráfica principal será exibida, permitindo que você interaja com o controle de estoque.
 
+## Licença / Autor
+
+[![NPM](https://img.shields.io/npm/l/react)](https://github.com/michelleGomes85/InventoryControl/blob/main/LICENSE) 
+[![GitHub](https://img.shields.io/badge/GitHub-000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/michellegomes85)
+
 
   
